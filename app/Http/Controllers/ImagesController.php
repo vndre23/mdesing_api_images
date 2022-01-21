@@ -13,7 +13,10 @@ class ImagesController extends Controller
     /**
      * Get Images by Course and User
      *
-     * Get the images by course ID and user ID
+     * Get the images by course ID and user ID.
+     *
+     * @urlParam idCourse required int course by id.
+     * @urlParam userId required int user by id.
      *
      * @response {
      *    "data": [
@@ -31,13 +34,15 @@ class ImagesController extends Controller
      *   }
      */
     public function getCourseUser($idCourse,$userId){
-        $images = Images::where('courseid',$courseId)->where('userid',$userId)->get();
+        $images = Images::where('courseid',$idCourse)->where('userid',$userId)->get();
         return response()->json(["data"=>$images,"size"=>count($images)]);
     }
     /**
      * Get Images by Course
      *
-     * Get the images by course ID
+     * Get the images by course ID.
+     *
+     * @urlParam idCourse required int course by id.
      *
      * @response {
      *    "data": [
@@ -54,14 +59,16 @@ class ImagesController extends Controller
      *    "size": 1
      *   }
      */
-    public function get($courseId){
-        $images = Images::where('courseid',$courseId)->get();
+    public function get($idCourse){
+        $images = Images::where('courseid',$idCourse)->get();
         return response()->json(["data"=>$images,"size"=>count($images)]);
     }
     /**
      * Get Images by User
      *
-     * Get the images by user ID
+     * Get the images by user ID.
+     *
+     * @urlParam userId required int user by id.
      *
      * @response{
      *    "data": [
@@ -78,8 +85,8 @@ class ImagesController extends Controller
      *    "size": 1
      *   }
      */
-    public function getImageUser($idUser){
-        $images = Images::where('userid',$idUser)->get();
+    public function getImageUser($userId){
+        $images = Images::where('userid',$userId)->get();
         return response()->json(["data"=>$images,"size"=>count($images)]);
     }
     /**
